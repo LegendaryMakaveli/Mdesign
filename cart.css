@@ -1,0 +1,220 @@
+
+body {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    overflow-x: hidden;
+}
+
+header {
+    background: #111;
+    padding: 15px 20px;
+}
+
+nav {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        background: rgba(0, 0, 0, 0.8);
+        padding: 15px 20px;
+        position: fixed;
+        width: 100%;
+        top: 0;
+        left: 0;
+        /* z-index: 1000; */
+   }
+
+.logo {
+    font-size: 24px;
+    font-weight: bold;
+    color: #00FFFF;
+}
+
+.nav-links {
+    list-style: none;
+    display: flex;
+}
+
+.nav-links li {
+    margin: 0 15px;
+}
+
+.nav-links a {
+    color: white;
+    text-decoration: none;
+    font-size: 16px;
+}
+
+.nav-links a:hover {
+    color: #9B5DE5;
+}
+
+.nav-links .active {
+    border-bottom: 2px solid #ff4757;
+}
+/* Cart Page Styling */
+.cart-container {
+    max-width: 800px;
+    max-height: 80vh;
+    margin: 40px auto;
+    overflow-y: auto;
+    padding-right: 15px;
+    border-style: hidden;
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    border-radius: 10px;
+    box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.2);
+    text-align: center;
+}
+
+.cart-container h1 {
+    font-size: 28px;
+    color: #fff;
+    margin-bottom: 20px;
+}
+
+
+.cart-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 8px;
+    padding: 15px;
+    margin-bottom: 15px;
+    box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.1);
+    opacity: 0;
+    transform: translateY(20px);
+    animation: slideUp 0.5s forwards;
+}
+
+.cart-item img {
+    width: 80px;
+    height: 80px;
+    object-fit: cover;
+    border-radius: 8px;
+    transition: transform 0.3s ease-in-out;
+}
+
+.cart-item:hover img {
+    transform: scale(1.1);
+}
+
+.cart-item div {
+    flex-grow: 1;
+    margin-left: 15px;
+    text-align: left;
+}
+
+.cart-item h3 {
+    font-size: 18px;
+    color: #fff;
+}
+
+.cart-item p {
+    font-size: 16px;
+    color: #ddd;
+}
+
+.remove-btn {
+    background: #ff4757;
+    color: white;
+    border: none;
+    padding: 8px 12px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background 0.3s ease-in-out;
+}
+
+.remove-btn:hover {
+    background: #e84118;
+}
+
+/* Checkout Button */
+#checkout-btn {
+    padding: 12px 10px;
+    font-size: 18px;
+    background: linear-gradient(45deg, #ff4757, #ff6b81);
+    color: white;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    margin-top: 20px;
+    transition: transform 0.3s ease-in-out, background 0.3s ease-in-out;
+    margin-left: 300px;
+}
+
+#checkout-btn:hover {
+    transform: scale(1.1);
+    background: linear-gradient(45deg, #e84118, #ff4757);
+}
+
+/* Floating Animated Background Shapes */
+.floating-shapes {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: -1;
+}
+
+.floating-shapes::before,
+.floating-shapes::after {
+    content: "";
+    position: absolute;
+    width: 80px;
+    height: 80px;
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    border-radius: 50%;
+    animation: floatAnimation 5s infinite alternate ease-in-out;
+}
+
+.floating-shapes::before {
+    top: 10%;
+    left: 20%;
+}
+
+.floating-shapes::after {
+    bottom: 10%;
+    right: 25%;
+}
+
+/* Animations */
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+@keyframes slideUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes floatAnimation {
+    from { transform: translateY(0); }
+    to { transform: translateY(-20px); }
+}
+  /* Responsive Navbar */
+  @media (max-width: 768px) {
+    .nav-links.active {
+      display: flex;
+    }
+
+    nav ul li a {
+        display: block;
+        font-size: 10px;
+    }
+    nav ul li {
+          font-size: 10px;
+    }
+
+    #checkout-btn {
+       font-size: 0.5rem;
+       margin-left: 5px;
+    }
+
+  }
+  

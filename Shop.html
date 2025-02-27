@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Shop - MDesigns</title>
+    <link rel="stylesheet" href="Shop.css" />
+  </head>
+  <body>
+    <!-- Navbar -->
+    <header>
+      <nav>
+        <div class="logo">MDesigns</div>
+        <ul class="nav-links">
+          <li><a href="index.html">Home</a></li>
+          <li><a href="shop.html" class="active">Shop</a></li>
+          <li>
+            <a href="cart.html">🛒(<span id="cart-count">0</span>)</a>
+          </li>
+          <li><a href="chat.html">Chat</a></li>
+          <li><a href="login.html">Login</a></li>
+        </ul>
+        <div class="menu-toggle">&#9776;</div>
+      </nav>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+      <h1>Premium UI Designs & Templates</h1>
+      <p>
+        Explore our exclusive collection of UI kits, web templates, and
+        interactive designs.
+      </p>
+    </section>
+
+    <!-- Shop Grid -->
+    <section class="shop-container">
+      <div class="shop-grid">
+        <!-- Item 1 -->
+        <div class="shop-item">
+          <img src="images/design1.jpg" alt="UI Design 1" />
+          <h3>Modern Web Template</h3>
+          <p>$25.00</p>
+          <button
+            class="add-to-cart"
+            data-name="Modern UI Kit"
+            data-price="20"
+            data-image="img/ui-kit.png"
+          >
+            Add to Cart
+          </button>
+        </div>
+
+        <!-- Item 2 -->
+        <div class="shop-item">
+          <img src="images/design2.jpg" alt="UI Design 2" />
+          <h3>Dashboard UI Kit</h3>
+          <p>$35.00</p>
+          <button
+            class="add-to-cart"
+            data-name="Modern UI Kit"
+            data-price="20"
+            data-image="img/ui-kit.png"
+          >
+            Add to Cart
+          </button>
+        </div>
+
+        <!-- Item 3 (Video) -->
+        <div class="shop-item">
+          <video src="videos/demo1.mp4" muted autoplay loop></video>
+          <h3>Interactive UI Demo</h3>
+          <p>$40.00</p>
+          <button
+            class="add-to-cart"
+            data-name="Modern UI Kit"
+            data-price="20"
+            data-image="img/ui-kit.png"
+          >
+            Add to Cart
+          </button>
+        </div>
+
+        <!-- Item 4 -->
+        <div class="shop-item">
+          <img src="images/design3.jpg" alt="UI Design 3" />
+          <h3>Portfolio UI</h3>
+          <p>$30.00</p>
+          <button
+            class="add-to-cart"
+            data-name="Modern UI Kit"
+            data-price="20"
+            data-image="img/ui-kit.png"
+          >
+            Add to Cart
+          </button>
+        </div>
+
+        <!-- Item 5 (New) -->
+        <div class="shop-item">
+          <img src="images/design4.jpg" alt="UI Design 4" />
+          <h3>eCommerce UI Kit</h3>
+          <p>$45.00</p>
+          <button
+            class="add-to-cart"
+            data-name="Modern UI Kit"
+            data-price="20"
+            data-image="img/ui-kit.png"
+          >
+            Add to Cart
+          </button>
+        </div>
+
+        <!-- Item 6 (New) -->
+        <div class="shop-item">
+          <video src="videos/demo2.mp4" muted autoplay loop></video>
+          <h3>Animated Landing Page</h3>
+          <p>$50.00</p>
+          <button
+            class="add-to-cart"
+            data-name="Modern UI Kit"
+            data-price="20"
+            data-image="img/ui-kit.png"
+          >
+            Add to Cart
+          </button>
+        </div>
+
+        <!-- Item 7 (New) -->
+        <div class="shop-item">
+          <img src="images/design5.jpg" alt="UI Design 5" />
+          <h3>Creative Mobile UI</h3>
+          <p>$20.00</p>
+          <button
+            class="add-to-cart"
+            data-name="Modern UI Kit"
+            data-price="20"
+            data-image="img/ui-kit.png"
+          >
+            Add to Cart
+          </button>
+        </div>
+
+        <!-- Item 8 (New Video) -->
+        <div class="shop-item">
+          <video src="videos/demo3.mp4" muted autoplay loop></video>
+          <h3>Figma Interactive Prototype</h3>
+          <p>$55.00</p>
+          <button
+            class="add-to-cart"
+            data-name="Modern UI Kit"
+            data-price="20"
+            data-image="img/ui-kit.png"
+          >
+            Add to Cart
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <script src="script.js"></script>
+
+    <script>
+      //Handle add to cart
+      document.addEventListener("DOMContentLoaded", () => {
+        const cartCount = document.getElementById("cart-count");
+        const addToCartButtons = document.querySelectorAll(".add-to-cart");
+
+        function getCart() {
+          return JSON.parse(localStorage.getItem("cart")) || [];
+        }
+
+        function updateCartCount() {
+          let cart = getCart();
+          cartCount.textContent = cart.length;
+        }
+
+        addToCartButtons.forEach((button) => {
+          button.addEventListener("click", (event) => {
+            let name = event.target.dataset.name;
+            let price = event.target.dataset.price;
+            let image = event.target.dataset.image;
+
+            let cart = getCart();
+            cart.push({ name, price, image });
+
+            localStorage.setItem("cart", JSON.stringify(cart));
+            updateCartCount();
+            alert(`${name} added to cart!`);
+          });
+        });
+
+        updateCartCount();
+      });
+    </script>
+  </body>
+</html>

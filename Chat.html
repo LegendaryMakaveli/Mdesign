@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Chat - MDesigns</title>
+    <link rel="stylesheet" href="styles.css" />
+
+    <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js"></script>
+  </head>
+  <body>
+    <!-- Navbar -->
+    <div id="navbar-container"></div>
+
+    <nav class="navbar">
+      <div class="logo"><a href="index.html">MDesigns</a></div>
+      <ul class="nav-links">
+        <li><a href="chat.html">Chat</a></li>
+        <li><a href="login.html">Login</a></li>
+        <li><a href="index.html">Home</a></li>
+      </ul>
+      <div class="menu-toggle">&#9776;</div>
+    </nav>
+
+    <div class="chat-container">
+      <h1>Live Chat</h1>
+      <p>Chat with us to discuss your design needs.</p>
+      <textarea placeholder="Type your message..."></textarea>
+      <button>Send</button>
+    </div>
+
+    <script src="script.js"></script>
+    <script>
+      document.getElementById("navbar-container").innerHTML =
+        '<object type="text/html" data="navbar.html" ></object>';
+    </script>
+  </body>
+</html>

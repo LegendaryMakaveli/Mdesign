@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Cart - MDesigns</title>
+    <link rel="stylesheet" href="cart.css" />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <!-- Navbar -->
+    <header>
+      <nav>
+        <div class="logo">MDesigns</div>
+        <ul class="nav-links">
+          <li><a href="index.html">Home</a></li>
+          <li><a href="shop.html">Shop</a></li>
+          <li>
+            <a href="cart.html" class="active"
+              >🛒(<span id="cart-count">0</span>)</a
+            >
+          </li>
+          <li><a href="chat.html">Chat</a></li>
+        </ul>
+      </nav>
+    </header>
+
+    <section class="cart-container">
+      <h1>Your Shopping Cart</h1>
+      <div id="cart-items"></div>
+      <button id="checkout-btn" class="btn">Proceed to Checkout</button>
+    </section>
+
+    <script src="cart.js"></script>
+
+    <script>
+      // Handle cart display and checkout
+
+      document.addEventListener("DOMContentLoaded", () => {
+        const cartItemsContainer = document.getElementById("cart-items");
+        const cartCount = document.getElementById("cart-count");
+        const checkoutBtn = document.getElementById("checkout-btn");
+
+        // Load cart from local storage
+        function getCart() {
+          return JSON.parse(localStorage.getItem("cart")) || [];
+        }
+
+        function updateCartCount() {
+          let cart = getCart();
+          cartCount.textContent = cart.length;
+        }
+
+        function renderCartItems() {
+          let cart = getCart();
+          cartItemsContainer.innerHTML = "";
+
+          if (cart.length === 0) {
+            cartItemsContainer.innerHTML = "<p>Your cart is empty.</p>";
+            checkoutBtn.style.display = "none";
+            return;
+          }
+
+          cart.forEach((item, index) => {
+            let cartItem = document.createElement("div");
+            cartItem.classList.add("cart-item");
+
+            cartItem.innerHTML = `
+                <img src="${item.image}" alt="${item.name}">
+                <div>
+                    <h3>${item.name}</h3>
+                    <p>$${item.price}.00</p>
+                    <button class="remove-btn" data-index="${index}">Remove</button>
+                </div>
+            `;
+
+            cartItemsContainer.appendChild(cartItem);
+          });
+
+          document.querySelectorAll(".remove-btn").forEach((button) => {
+            button.addEventListener("click", (event) => {
+              let index = event.target.dataset.index;
+              let cart = getCart();
+              cart.splice(index, 1);
+              localStorage.setItem("cart", JSON.stringify(cart));
+              renderCartItems();
+              updateCartCount();
+            });
+          });
+
+          checkoutBtn.style.display = "block";
+        }
+
+        // Checkout button
+        checkoutBtn.addEventListener("click", () => {
+          if (getCart().length === 0) {
+            alert("Your cart is empty!");
+            return;
+          }
+          alert("Redirecting to checkout...");
+          localStorage.removeItem("cart");
+          window.location.href = "checkout.html";
+        });
+
+        renderCartItems();
+        updateCartCount();
+      });
+    </script>
+  </body>
+</html>
