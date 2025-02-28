@@ -78,6 +78,72 @@
           loginBtn.classList.remove("active");
         });
       });
+
+      document
+        .getElementById("signup-form")
+        .addEventListener("submit", async (e) => {
+          e.preventDefault();
+          const name = document.getElementById("signup-name").value;
+          const email = document.getElementById("signup-email").value;
+          const password = document.getElementById("signup-password").value;
+
+          const res = await fetch("http://localhost:5000/api/register", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ name, email, password }),
+          });
+
+          const data = await res.json();
+          alert(data.message);
+        });
+      // login and rdirect to dashboard
+      document
+        .getElementById("login-form")
+        .addEventListener("submit", async (e) => {
+          e.preventDefault();
+          const email = document.getElementById("login-email").value;
+          const password = document.getElementById("login-password").value;
+
+          const res = await fetch("http://localhost:5000/api/login", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ email, password }),
+          });
+
+          const data = await res.json();
+          if (data.token) {
+            localStorage.setItem("token", data.token);
+            alert("Login successful!");
+            window.location.href = "dashboard.html"; // Redirect to dashboard
+          } else {
+            alert(data.message);
+          }
+        });
+      //signup and redirect to dashboard
+      document
+        .getElementById("signup-form")
+        .addEventListener("submit", async (e) => {
+          e.preventDefault();
+
+          const name = document.getElementById("signup-name").value;
+          const email = document.getElementById("signup-email").value;
+          const password = document.getElementById("signup-password").value;
+
+          const res = await fetch("http://localhost:5000/api/login", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ email, password }),
+          });
+
+          const data = await res.json();
+          if (data.token) {
+            localStorage.setItem("token", data.token);
+            alert("Signup successful!");
+            window.location.href = "dashboard.html"; // Redirect to dashboard
+          } else {
+            alert(data.message);
+          }
+        });
     </script>
     <script src="script.js"></script>
   </body>
