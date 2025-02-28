@@ -5,10 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Login or Create Profile - MDesigns</title>
     <link rel="stylesheet" href="login.css" />
-
-    <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js"></script>
   </head>
   <body>
     <nav class="navbar">
@@ -53,11 +49,8 @@
         </form>
       </div>
     </div>
-
-    <script src="firebase-config.js"></script>
     <script>
       //switching betwween login and signup
-
       document.addEventListener("DOMContentLoaded", () => {
         const loginBtn = document.getElementById("show-login");
         const signupBtn = document.getElementById("show-signup");
@@ -77,87 +70,6 @@
           signupBtn.classList.add("active");
           loginBtn.classList.remove("active");
         });
-      });
-
-      document.addEventListener("DOMContentLoaded", () => {
-        // ✅ Signup Form Event Listener
-        const signupForm = document.getElementById("signup-form");
-        if (signupForm) {
-          signupForm.addEventListener("submit", async (e) => {
-            e.preventDefault();
-
-            const name = document.getElementById("signup-name").value.trim();
-            const email = document.getElementById("signup-email").value.trim();
-            const password = document
-              .getElementById("signup-password")
-              .value.trim();
-
-            if (!name || !email || !password) {
-              alert("All fields are required.");
-              return;
-            }
-
-            try {
-              const res = await fetch("http:// 172.20.10.3:5000/api/register", {
-                method: "POST",
-                headers: { "Content-Type": "application/json" },
-                body: JSON.stringify({ name, email, password }),
-              });
-
-              const data = await res.json();
-              console.log("Signup Response:", data); // ✅ Debugging
-
-              if (res.ok) {
-                localStorage.setItem("token", data.token);
-                window.location.href = "dashboard.html"; // ✅ Redirect to dashboard
-              } else {
-                alert(data.message || "Signup failed. Please try again.");
-              }
-            } catch (error) {
-              console.error("Signup Error:", error);
-              alert("An error occurred during signup. Please try again.");
-            }
-          });
-        }
-
-        // ✅ Login Form Event Listener
-        const loginForm = document.getElementById("login-form");
-        if (loginForm) {
-          loginForm.addEventListener("submit", async (e) => {
-            e.preventDefault();
-
-            const email = document.getElementById("login-email").value.trim();
-            const password = document
-              .getElementById("login-password")
-              .value.trim();
-
-            if (!email || !password) {
-              alert("Email and password are required.");
-              return;
-            }
-
-            try {
-              const res = await fetch("http:// 172.20.10.3:5000/api/login", {
-                method: "POST",
-                headers: { "Content-Type": "application/json" },
-                body: JSON.stringify({ email, password }),
-              });
-
-              const data = await res.json();
-              console.log("Login Response:", data); // ✅ Debugging
-
-              if (res.ok) {
-                localStorage.setItem("token", data.token);
-                window.location.href = "dashboard.html"; // ✅ Redirect to dashboard
-              } else {
-                alert(data.message || "Invalid credentials");
-              }
-            } catch (error) {
-              console.error("Login Error:", error);
-              alert("An error occurred during login. Please try again.");
-            }
-          });
-        }
       });
     </script>
     <script src="script.js"></script>
