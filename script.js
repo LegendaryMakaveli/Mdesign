@@ -1,29 +1,3 @@
-// Function to create floating shapes
-function createShapes() {
-    const shapeTypes = ["circle", "square", "triangle"];
-    const background = document.querySelector(".background");
-  
-    for (let i = 0; i < 15; i++) { // Create 15 shapes
-      let shape = document.createElement("div");
-      let randomShape = shapeTypes[Math.floor(Math.random() * shapeTypes.length)];
-      shape.classList.add("shape", randomShape);
-  
-      let randomX = Math.random() * window.innerWidth; // Random X position
-      let randomSize = Math.random() * 40 + 20; // Random size (20px to 60px)
-      let randomSpeed = Math.random() * 10 + 5; // Animation speed (5s to 15s)
-  
-      shape.style.left = `${randomX}px`;
-      shape.style.width = `${randomSize}px`;
-      shape.style.height = `${randomSize}px`;
-      shape.style.animationDuration = `${randomSpeed}s`;
-  
-      background.appendChild(shape);
-    }
-  }
-  
-  // Call function when page loads
-  document.addEventListener("DOMContentLoaded", createShapes);
-  
   // Explore button navigation
   function exploreTemplates() {
     window.location.href = "templates.html"; // Update with actual page link
@@ -42,21 +16,6 @@ function createShapes() {
 
   document.getElementById("navbar-container").innerHTML =
   '<object type="text/html" data="navbar.html" ></object>';
-
-  //login authentification
-  const firebaseConfig = {
-    apiKey: "AIzaSyB8NaAZ_97XCPoDM1sQBs--Zs9ziQ9FO4c",
-    authDomain: "mdesigns-45ff9.firebaseapp.com",
-    projectId: "mdesigns-45ff9",
-    storageBucket: "mdesigns-45ff9.appspot.com",
-    messagingSenderId: "561823508868",
-    appId: "1:561823508868:android:f708f90619e31d23c195d1"
-  };
-  
-  // Initialize Firebase
-  firebase.initializeApp(firebaseConfig);
-  const auth = firebase.auth();
-  const db = firebase.firestore();
   
 
   document.addEventListener("DOMContentLoaded", () => {
@@ -87,15 +46,15 @@ function createShapes() {
       const password = document.getElementById("signup-password").value;
   
       auth.createUserWithEmailAndPassword(email, password)
-        .then((userCredential) => {
+      .then((userCredential) => {
           const user = userCredential.user;
-          return db.collection("users").doc(user.uid).set({
-            name: name,
-            email: email
+          firestore.collection("users").doc(user.uid).set({
+              name: name,
+              email: email,
           });
         })
         .then(() => {
-          alert("Profile Created! Redirecting to Dashboard...");
+          alert("Profile Created Sucessfully...");
           window.location.href = "dashboard.html";
         })
         .catch((error) => alert(error.message));
@@ -108,9 +67,9 @@ function createShapes() {
       const password = document.getElementById("login-password").value;
   
       auth.signInWithEmailAndPassword(email, password)
-        .then(() => {
-          alert("Login Successful! Redirecting...");
-          window.location.href = "dashboard.html";
+      .then((userCredential) => {
+          alert("Login successful!");
+          window.location.href = "dashboard.html"; // Redirect to dashboard after login
         })
         .catch((error) => alert(error.message));
     });
